@@ -805,3 +805,59 @@ body {
   }
 }
 
+/*---------------------------------
+ PREMIUM PRODUCT CARD EFFECT
+----------------------------------*/
+.product-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 1.6rem;
+  border-radius: 18px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+  transition: 0.25s ease;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover lift + glow */
+.product-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,255,255,0.3);
+  box-shadow: 0 16px 45px rgba(0,0,0,0.6);
+}
+
+/* Shine stroke on hover */
+.product-card::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+  transform: rotate(25deg);
+  transition: 0.45s;
+}
+
+.product-card:hover::after {
+  top: 0%;
+  left: 0%;
+}
+
+/* Product title premium */
+.product-card h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #FACC15;
+  margin-bottom: 0.6rem;
+}
+
+/* Bullet style */
+.product-card li {
+  margin: 0.3rem 0;
+  color: #d9d9d9;
+}
+
+
