@@ -1016,6 +1016,22 @@ body {
   font-size: 0.75rem;
   color: #9ca3af;
 }
+/*---------------------------------
+ MOBILE TABLE REFINEMENT
+----------------------------------*/
+@media (max-width: 680px) {
+  .product-table {
+    font-size: 0.75rem;
+  }
+  .product-table th,
+  .product-table td {
+    padding: 0.6rem 0.5rem;
+  }
+  .product-table-note {
+    font-size: 0.68rem;
+  }
+}
+
 
 
 
