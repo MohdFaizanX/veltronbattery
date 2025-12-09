@@ -1032,6 +1032,13 @@ body {
   }
 }
 
+@media (max-width: 650px) {
+  .nav {
+    gap: 0.9rem;
+    font-size: 0.85rem;
+  }
+}
+
 
 
 
