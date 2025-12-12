@@ -168,7 +168,60 @@
   💬
 </a>
 
-  
+  <!-- Dealer Apply Modal -->
+<div id="dealer-apply-modal" class="modal" aria-hidden="true">
+  <div class="modal-backdrop" id="modal-backdrop"></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="dealerModalTitle">
+    <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+    <h3 id="dealerModalTitle">Apply as Dealer / OEM Partner</h3>
+    <p class="muted">Fill details and our team will contact you within 24 hours.</p>
+
+    <!-- Replace YOUR_FORMSPREE_ENDPOINT with the one from Formspree -->
+    <form id="dealerForm" action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT" method="POST">
+      <label>
+        Company / Dealer Name
+        <input type="text" name="company" required />
+      </label>
+
+      <label>
+        Contact Person
+        <input type="text" name="name" required />
+      </label>
+
+      <label>
+        Phone / WhatsApp
+        <input type="tel" name="phone" required />
+      </label>
+
+      <label>
+        Email
+        <input type="email" name="email" required />
+      </label>
+
+      <label>
+        City / State
+        <input type="text" name="city" />
+      </label>
+
+      <label>
+        Interested Products / Qty (approx.)
+        <textarea name="requirements" rows="3" placeholder="E-rickshaw packs, UPS, OEM qty etc."></textarea>
+      </label>
+
+      <div style="display:flex; gap:0.6rem; margin-top:0.6rem;">
+        <button type="submit" class="btn btn-primary">Submit Application</button>
+        <button type="button" class="btn btn-ghost" id="modal-cancel">Cancel</button>
+      </div>
+
+      <input type="hidden" name="_subject" value="New Dealer Application - Veltron" />
+      <input type="hidden" name="_language" value="en" />
+      <input type="hidden" name="_after" value="https://mohdfaizanx.github.io/veltronbattery/contact.html?thanks=dealer" />
+    </form>
+
+    <p class="form-note">Or message us directly on WhatsApp: <a href="https://wa.me/919755587568">+91 97555 87568</a></p>
+  </div>
+</div>
+
   
 </body>
 </html>
@@ -235,6 +288,7 @@
     <a href="#dealer-apply-modal" class="btn btn-primary" id="open-dealer-modal">Apply as Dealer</a>
   </div>
 </div>
+
 
 
 
