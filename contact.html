@@ -212,57 +212,58 @@
   <!-- Dealer Modal JS -->
 <script>
 (function(){
-  try {
-    const openBtn = document.getElementById('open-dealer-modal');
-    const modal = document.getElementById('dealer-apply-modal');
-    const closeBtn = document.getElementById('modal-close');
-    const cancelBtn = document.getElementById('modal-cancel');
-    const backdrop = document.getElementById('modal-backdrop');
+  document.addEventListener('DOMContentLoaded', function() {
+    try {
+      const openBtn = document.getElementById('open-dealer-modal');
+      const modal = document.getElementById('dealer-apply-modal');
+      const closeBtn = document.getElementById('modal-close');
+      const cancelBtn = document.getElementById('modal-cancel');
+      const backdrop = document.getElementById('modal-backdrop');
 
-    console.log('Modal debug: openBtn=', !!openBtn, 'modal=', !!modal, 'closeBtn=', !!closeBtn);
+      console.log('Modal debug after DOM loaded -> openBtn=', !!openBtn, 'modal=', !!modal, 'closeBtn=', !!closeBtn);
 
-    function showModal(){
-      if(!modal) return console.warn('showModal: modal missing');
-      modal.setAttribute('aria-hidden','false');
-      modal.style.display = 'block';
-      setTimeout(()=> {
-        const f = modal.querySelector('input[name="company"], input, textarea');
-        f && f.focus();
-      }, 120);
-    }
-    function hideModal(){
-      if(!modal) return;
-      modal.setAttribute('aria-hidden','true');
-      modal.style.display = 'none';
-    }
-
-    // Bind click
-    if(openBtn) {
-      openBtn.addEventListener('click', function(e){
-        e && e.preventDefault && e.preventDefault();
-        showModal();
-      });
-    } else {
-      // fallback: find element by visible text
-      const found = Array.from(document.querySelectorAll('a,button')).find(el => (el.textContent||'').trim().toLowerCase() === 'apply as dealer');
-      if(found) {
-        console.log('Modal fallback: found apply button by text');
-        found.id = 'open-dealer-modal';
-        found.addEventListener('click', function(e){ e.preventDefault(); showModal(); });
-      } else {
-        console.warn('Modal binder: apply button not found');
+      function showModal(){
+        if(!modal) return console.warn('showModal: modal missing');
+        modal.setAttribute('aria-hidden','false');
+        modal.style.display = 'block';
+        setTimeout(()=> {
+          const f = modal.querySelector('input[name="company"], input, textarea');
+          f && f.focus();
+        }, 120);
       }
+      function hideModal(){
+        if(!modal) return;
+        modal.setAttribute('aria-hidden','true');
+        modal.style.display = 'none';
+      }
+
+      if(openBtn){
+        openBtn.addEventListener('click', function(e){
+          e && e.preventDefault && e.preventDefault();
+          showModal();
+        });
+      } else {
+        // fallback: bind to element whose visible text is "Apply as Dealer"
+        const found = Array.from(document.querySelectorAll('a,button'))
+          .find(el => (el.textContent||'').trim().toLowerCase() === 'apply as dealer');
+        if(found) {
+          found.id = 'open-dealer-modal';
+          found.addEventListener('click', function(e){ e.preventDefault(); showModal(); });
+          console.log('Modal fallback: bound to element by text');
+        } else {
+          console.warn('Modal binder: apply button not found after DOMContentLoaded');
+        }
+      }
+
+      closeBtn && closeBtn.addEventListener('click', hideModal);
+      cancelBtn && cancelBtn.addEventListener('click', hideModal);
+      backdrop && backdrop.addEventListener('click', hideModal);
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hideModal(); });
+
+    } catch(err) {
+      console.error('Modal script error', err);
     }
-
-    // Close handlers
-    closeBtn && closeBtn.addEventListener('click', hideModal);
-    cancelBtn && cancelBtn.addEventListener('click', hideModal);
-    backdrop && backdrop.addEventListener('click', hideModal);
-    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hideModal(); });
-
-  } catch(err) {
-    console.error('Modal script error', err);
-  }
+  });
 })();
 </script>
 
@@ -334,6 +335,7 @@
 
   </div>
 </div>
+
 
 
 
