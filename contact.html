@@ -221,61 +221,51 @@
 
     console.log('Modal debug: openBtn=', !!openBtn, 'modal=', !!modal, 'closeBtn=', !!closeBtn);
 
-    if(!openBtn) {
-      console.warn('Modal: open button (#open-dealer-modal) not found. Check Apply button id.');
-    }
-    if(!modal) {
-      console.warn('Modal: modal wrapper (#dealer-apply-modal) not found. Check modal id.');
-    }
-
-    function openModal(e){
-      if(e && typeof e.preventDefault === 'function') e.preventDefault();
-      if(!modal) return;
+    function showModal(){
+      if(!modal) return console.warn('showModal: modal missing');
       modal.setAttribute('aria-hidden','false');
-      // ensure visible (in case CSS didn't show)
       modal.style.display = 'block';
-      setTimeout(()=>{
-        const first = modal.querySelector('input[name="company"], input, textarea');
-        first && first.focus();
+      setTimeout(()=> {
+        const f = modal.querySelector('input[name="company"], input, textarea');
+        f && f.focus();
       }, 120);
-      console.log('Modal opened');
     }
-
-    function closeModal(){
+    function hideModal(){
       if(!modal) return;
       modal.setAttribute('aria-hidden','true');
       modal.style.display = 'none';
-      console.log('Modal closed');
     }
 
-    // safe event binding
-    openBtn && openBtn.addEventListener('click', openModal);
-    closeBtn && closeBtn.addEventListener('click', closeModal);
-    cancelBtn && cancelBtn.addEventListener('click', closeModal);
-    backdrop && backdrop.addEventListener('click', closeModal);
-
-    // close on ESC
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape') closeModal();
-    });
-
-    // If modal present but still not showing, add fallback click handler to the link
-    // (This ensures behavior even if CSS or other scripts interfere)
-    document.querySelectorAll('a#open-dealer-modal').forEach(a=>{
-      a.addEventListener('click', function(evt){
-        // prevent default navigation (fragment) and open modal
-        if(modal) {
-          evt.preventDefault();
-          openModal(evt);
-        }
+    // Bind click
+    if(openBtn) {
+      openBtn.addEventListener('click', function(e){
+        e && e.preventDefault && e.preventDefault();
+        showModal();
       });
-    });
+    } else {
+      // fallback: find element by visible text
+      const found = Array.from(document.querySelectorAll('a,button')).find(el => (el.textContent||'').trim().toLowerCase() === 'apply as dealer');
+      if(found) {
+        console.log('Modal fallback: found apply button by text');
+        found.id = 'open-dealer-modal';
+        found.addEventListener('click', function(e){ e.preventDefault(); showModal(); });
+      } else {
+        console.warn('Modal binder: apply button not found');
+      }
+    }
+
+    // Close handlers
+    closeBtn && closeBtn.addEventListener('click', hideModal);
+    cancelBtn && cancelBtn.addEventListener('click', hideModal);
+    backdrop && backdrop.addEventListener('click', hideModal);
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hideModal(); });
 
   } catch(err) {
-    console.error('Modal script error:', err);
+    console.error('Modal script error', err);
   }
 })();
 </script>
+
 
   
 </body>
@@ -344,6 +334,7 @@
 
   </div>
 </div>
+
 
 
 
