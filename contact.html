@@ -169,29 +169,35 @@
 </a>
 
   <!-- Dealer Apply Modal -->
-<div id="dealer-apply-modal" class="modal" aria-hidden="true">
-  <div class="modal-backdrop" id="modal-backdrop"></div>
+<!-- Dealer Apply Modal (paste just before </body>) -->
+<div id="dealer-apply-modal" class="modal" aria-hidden="true" style="display:none;">
+  <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true"></div>
   <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="dealerModalTitle">
     <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
     <h3 id="dealerModalTitle">Apply as Dealer / OEM Partner</h3>
 
+    <!-- IMPORTANT: replace the action URL with your real Formspree endpoint -->
     <form id="dealerForm" action="https://formspree.io/f/mvgedwrk" method="POST">
-
       <label>Company / Dealer Name
-        <input type="text" name="company" required />
+        <input type="text" name="company" required>
       </label>
+
       <label>Contact Person
-        <input type="text" name="name" required />
+        <input type="text" name="name" required>
       </label>
+
       <label>Phone / WhatsApp
-        <input type="tel" name="phone" required />
+        <input type="tel" name="phone" required>
       </label>
+
       <label>Email
-        <input type="email" name="email" required />
+        <input type="email" name="email" required>
       </label>
+
       <label>City / State
-        <input type="text" name="city" />
+        <input type="text" name="city">
       </label>
+
       <label>Interested Products / Qty (approx.)
         <textarea name="requirements" rows="3"></textarea>
       </label>
@@ -201,70 +207,146 @@
         <button type="button" class="btn btn-ghost" id="modal-cancel">Cancel</button>
       </div>
 
-      <input type="hidden" name="_subject" value="New Dealer Application - Veltron" />
-      <input type="hidden" name="_after" value="https://mohdfaizanx.github.io/veltronbattery/contact.html?thanks=dealer" />
+      <!-- Optional: after success redirect (Formspree _after) -->
+      <input type="hidden" name="_subject" value="New Dealer Application - Veltron">
+      <input type="hidden" name="_after" value="https://mohdfaizanx.github.io/veltronbattery/contact.html?thanks=dealer">
     </form>
 
     <p class="form-note">Or message us: <a href="https://wa.me/919755587568">+91 97555 87568</a></p>
   </div>
 </div>
 
-
-  <!-- Dealer Modal JS -->
+<!-- Modal + AJAX submit script (paste directly after modal and before </body>) -->
 <script>
 (function(){
-  document.addEventListener('DOMContentLoaded', function() {
-    try {
-      const openBtn = document.getElementById('open-dealer-modal');
-      const modal = document.getElementById('dealer-apply-modal');
-      const closeBtn = document.getElementById('modal-close');
-      const cancelBtn = document.getElementById('modal-cancel');
-      const backdrop = document.getElementById('modal-backdrop');
+  document.addEventListener('DOMContentLoaded', function(){
+    // Elements
+    const modal = document.getElementById('dealer-apply-modal');
+    const openBtn = document.getElementById('open-dealer-modal'); // recommended to add this id to your Apply button
+    const closeBtn = document.getElementById('modal-close');
+    const cancelBtn = document.getElementById('modal-cancel');
+    const backdrop = document.getElementById('modal-backdrop');
+    const form = document.getElementById('dealerForm');
+    const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
 
-      console.log('Modal debug after DOM loaded -> openBtn=', !!openBtn, 'modal=', !!modal, 'closeBtn=', !!closeBtn);
-
-      function showModal(){
-        if(!modal) return console.warn('showModal: modal missing');
-        modal.setAttribute('aria-hidden','false');
-        modal.style.display = 'block';
-        setTimeout(()=> {
-          const f = modal.querySelector('input[name="company"], input, textarea');
-          f && f.focus();
-        }, 120);
+    // Utility: show simple toast
+    function showToast(msg, type='info'){
+      let wrapper = document.getElementById('vf-toast');
+      if(!wrapper){
+        wrapper = document.createElement('div');
+        wrapper.id = 'vf-toast';
+        wrapper.style.position = 'fixed';
+        wrapper.style.right = '20px';
+        wrapper.style.bottom = '20px';
+        wrapper.style.zIndex = 99999;
+        document.body.appendChild(wrapper);
       }
-      function hideModal(){
-        if(!modal) return;
-        modal.setAttribute('aria-hidden','true');
-        modal.style.display = 'none';
-      }
-
-      if(openBtn){
-        openBtn.addEventListener('click', function(e){
-          e && e.preventDefault && e.preventDefault();
-          showModal();
-        });
-      } else {
-        // fallback: bind to element whose visible text is "Apply as Dealer"
-        const found = Array.from(document.querySelectorAll('a,button'))
-          .find(el => (el.textContent||'').trim().toLowerCase() === 'apply as dealer');
-        if(found) {
-          found.id = 'open-dealer-modal';
-          found.addEventListener('click', function(e){ e.preventDefault(); showModal(); });
-          console.log('Modal fallback: bound to element by text');
-        } else {
-          console.warn('Modal binder: apply button not found after DOMContentLoaded');
-        }
-      }
-
-      closeBtn && closeBtn.addEventListener('click', hideModal);
-      cancelBtn && cancelBtn.addEventListener('click', hideModal);
-      backdrop && backdrop.addEventListener('click', hideModal);
-      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hideModal(); });
-
-    } catch(err) {
-      console.error('Modal script error', err);
+      const el = document.createElement('div');
+      el.innerText = msg;
+      el.style.marginTop = '8px';
+      el.style.padding = '10px 14px';
+      el.style.borderRadius = '10px';
+      el.style.boxShadow = '0 8px 30px rgba(2,6,23,0.6)';
+      el.style.color = '#071024';
+      el.style.background = (type==='error') ? '#ffd6d6' : (type==='success' ? '#dff7df' : '#fff9d6');
+      wrapper.appendChild(el);
+      setTimeout(()=> { el.style.opacity = '0'; setTimeout(()=> el.remove(), 400); }, 4200);
     }
-  });
+
+    // Show/hide modal
+    function showModal(){
+      if(!modal) return;
+      modal.setAttribute('aria-hidden','false');
+      modal.style.display = 'block';
+      // focus first input
+      setTimeout(()=>{
+        const f = modal.querySelector('input, textarea, select');
+        f && f.focus();
+      }, 120);
+    }
+    function hideModal(){
+      if(!modal) return;
+      modal.setAttribute('aria-hidden','true');
+      modal.style.display = 'none';
+    }
+
+    // Robust binder: if openBtn not found by id, fallback find by text
+    if(openBtn){
+      openBtn.addEventListener('click', function(e){
+        e.preventDefault && e.preventDefault();
+        showModal();
+      });
+    } else {
+      const found = Array.from(document.querySelectorAll('a,button'))
+        .find(el => (el.textContent||'').trim().toLowerCase() === 'apply as dealer');
+      if(found){
+        found.id = 'open-dealer-modal';
+        found.addEventListener('click', function(e){ e.preventDefault(); showModal(); });
+      } else {
+        console.warn('Modal binder: apply button not found');
+      }
+    }
+
+    // Close handlers
+    closeBtn && closeBtn.addEventListener('click', hideModal);
+    cancelBtn && cancelBtn.addEventListener('click', hideModal);
+    backdrop && backdrop.addEventListener('click', hideModal);
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hideModal(); });
+
+    // AJAX form submit
+    if(form){
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+
+        // basic required validation
+        const required = form.querySelectorAll('[required]');
+        for(let r of required){
+          if(!r.value.trim()){
+            r.focus();
+            showToast('Please fill required fields', 'error');
+            return;
+          }
+        }
+        if(!submitBtn) return;
+
+        const origText = submitBtn.innerText;
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Submitting...';
+
+        const fd = new FormData(form);
+        const action = form.getAttribute('action') || window.location.href;
+
+        fetch(action, {
+          method: 'POST',
+          body: fd,
+          headers: { 'Accept': 'application/json' }
+        }).then(async res => {
+          if(res.ok){
+            showToast('Application submitted — we will contact you soon.', 'success');
+            form.reset();
+            setTimeout(hideModal, 900);
+            // Optionally redirect to _after if present
+            const after = form.querySelector('input[name="_after"]')?.value;
+            if(after){
+              setTimeout(()=> window.location.href = after, 1400);
+            }
+          } else {
+            let msg = 'Submission failed. Try again later.';
+            try { const json = await res.json(); if(json && json.error) msg = json.error; } catch(e){}
+            showToast(msg, 'error');
+          }
+        }).catch(err => {
+          console.error('Submit error', err);
+          showToast('Network error. Check your connection.', 'error');
+        }).finally(()=>{
+          submitBtn.disabled = false;
+          submitBtn.innerText = origText;
+        });
+
+      });
+    }
+
+  }); // DOMContentLoaded end
 })();
 </script>
 
@@ -332,9 +414,10 @@
   </div>
 
   <div style="margin-top:1rem;">
-<a href="#dealer-apply-modal" class="btn btn-primary" id="open-dealer-modal" aria-controls="dealer-apply-modal">Apply as Dealer</a>
+<a id="open-dealer-modal" class="btn btn-primary" href="#dealer-apply-modal" aria-controls="dealer-apply-modal">Apply as Dealer</a>
   </div>
 </div>
+
 
 
 
