@@ -1165,6 +1165,10 @@ body {
   .modal-panel { padding: 1rem; width: 94%; }
 }
 
+/* modal debug visibility helper */
+.modal { display: none; }
+.modal[aria-hidden="false"] { display: block; }
+
 
 
 
