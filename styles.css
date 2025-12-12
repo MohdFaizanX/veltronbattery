@@ -1038,6 +1038,82 @@ body {
     font-size: 0.85rem;
   }
 }
+/*---------------------------------
+ DEALER / DISTRIBUTOR BADGES
+----------------------------------*/
+.dealer-advantages {
+  margin-top: 1.25rem;
+}
+
+.dealer-advantages h4 {
+  margin: 0 0 0.8rem 0;
+  color: #FACC15;
+  font-size: 1.02rem;
+  letter-spacing: 0.02em;
+}
+
+.dealer-badges {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 0.9rem;
+}
+
+.badge {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  background: rgba(255,255,255,0.035);
+  padding: 0.9rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  cursor: default;
+  overflow: hidden;
+}
+
+.badge-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  background: linear-gradient(135deg, rgba(250,204,21,0.16), rgba(250,204,21,0.04));
+  border: 1px solid rgba(250,204,21,0.12);
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 6px 18px rgba(250,204,21,0.06) inset;
+}
+
+.badge-body strong {
+  display: block;
+  font-size: 0.98rem;
+  color: #fff;
+  margin-bottom: 0.15rem;
+}
+
+.badge-body span {
+  display: block;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+}
+
+/* hover / focus micro animation */
+.badge:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 22px 60px rgba(0,0,0,0.6);
+  border-color: rgba(250,204,21,0.28);
+}
+
+/* small-screen layout */
+@media (max-width: 720px) {
+  .dealer-badges { grid-template-columns: 1fr; }
+  .badge { padding: 0.75rem; gap: 0.65rem; }
+  .badge-icon { width: 44px; height: 44px; font-size: 1.1rem; }
+}
+
 
 
 
