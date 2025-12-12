@@ -1169,6 +1169,13 @@ body {
 .modal { display: none; }
 .modal[aria-hidden="false"] { display: block; }
 
+/* modal visibility helpers */
+.modal { display: none; position: fixed; inset: 0; z-index: 2000; }
+.modal[aria-hidden="false"] { display: block; }
+.modal-backdrop { position:absolute; inset:0; background: rgba(2,6,23,0.7); backdrop-filter: blur(4px); }
+.modal-panel { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:96%; max-width:680px; padding:1.2rem; background: rgba(11,14,22,0.95); border-radius:12px; border:1px solid rgba(250,204,21,0.08); box-shadow:0 30px 80px rgba(0,0,0,0.75); }
+.modal-close { position:absolute; right:12px; top:10px; background:transparent; border:none; color:#ddd; font-size:1.05rem; cursor:pointer; }
+
 
 
 
