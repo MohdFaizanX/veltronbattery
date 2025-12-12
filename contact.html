@@ -222,6 +222,36 @@
   </div>
 </div>
 
+  <!-- Dealer Modal JS -->
+<script>
+  (function(){
+    const openBtn = document.getElementById('open-dealer-modal');
+    const modal = document.getElementById('dealer-apply-modal');
+    const closeBtn = document.getElementById('modal-close');
+    const cancelBtn = document.getElementById('modal-cancel');
+    const backdrop = document.getElementById('modal-backdrop');
+
+    function openModal(e){ 
+      e.preventDefault(); 
+      modal.setAttribute('aria-hidden','false'); 
+    }
+
+    function closeModal(){ 
+      modal.setAttribute('aria-hidden','true'); 
+    }
+
+    openBtn && openBtn.addEventListener('click', openModal);
+    closeBtn && closeBtn.addEventListener('click', closeModal);
+    cancelBtn && cancelBtn.addEventListener('click', closeModal);
+    backdrop && backdrop.addEventListener('click', closeModal);
+
+    const form = document.getElementById('dealerForm');
+    form && form.addEventListener('submit', function(){ 
+      setTimeout(()=>{ closeModal(); }, 800);
+    });
+  })();
+</script>
+
   
 </body>
 </html>
@@ -288,6 +318,7 @@
     <a href="#dealer-apply-modal" class="btn btn-primary" id="open-dealer-modal">Apply as Dealer</a>
   </div>
 </div>
+
 
 
 
