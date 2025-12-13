@@ -477,33 +477,76 @@ body {
   margin-top: 0.7rem;
 }
 
-/* ========== Footer ========== */
+/* ==============================
+   FINAL PREMIUM FOOTER (ONLY)
+============================== */
+
 .site-footer {
-  border-top: 1px solid var(--border);
   background: #020617;
-  padding: 1.5rem 0 1.6rem;
-  margin-top: 2rem;
-  font-size: 0.82rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 4rem;
 }
 
 .footer-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
+  max-width: 1120px;
+  margin: auto;
+  padding: 3.2rem 1.25rem 2.2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.8rem;
 }
 
-.footer-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  color: var(--muted);
+.footer-col h3,
+.footer-col h4 {
+  color: #ffffff;
+  margin-bottom: 0.6rem;
 }
 
-.footer-whatsapp {
-  color: var(--accent);
+.footer-brand {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.footer-tagline {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+.footer-col a {
+  display: block;
+  margin: 0.4rem 0;
+  color: #cbd5e1;
+  font-size: 0.88rem;
   text-decoration: none;
-  font-weight: 500;
+  transition: 0.25s ease;
 }
+
+.footer-col a:hover {
+  color: #facc15;
+  transform: translateX(4px);
+}
+
+.footer-wa {
+  margin-top: 0.8rem;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 1rem 0 1.2rem;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .footer-inner {
+    text-align: center;
+  }
+}
+
+
 
 /* ========== Responsive ========== */
 @media (max-width: 900px) {
@@ -696,75 +739,7 @@ body {
   margin: 0.2rem 0;
 }
 
-/*---------------------------------
- PREMIUM FOOTER
-----------------------------------*/
-.site-footer {
-  background: #020617;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  padding: 3rem 0 2rem;
-  margin-top: 4rem;
-}
 
-.footer-grid {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  row-gap: 2rem;
-}
-
-.footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.footer-logo {
-  width: 65px;
-  border-radius: 10px;
-}
-
-.footer-name {
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-}
-
-.footer-tagline {
-  font-size: 0.8rem;
-  color: #e3e3e3;
-}
-
-.footer-links a {
-  display: block;
-  color: #ccc;
-  margin-bottom: 0.4rem;
-  transition: 0.25s ease;
-}
-
-.footer-links a:hover {
-  color: #FACC15;
-  transform: translateX(3px);
-}
-
-.footer-contact p {
-  margin-bottom: 0.6rem;
-}
-
-.btn-footer {
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-size: 0.78rem;
-}
-
-.footer-bottom {
-  margin-top: 2rem;
-  text-align: center;
-  color: #bbb;
-  font-size: 0.75rem;
-  opacity: 0.85;
-}
 
 /*---------------------------------
  HERO ANIMATION + TEXT SHINE
@@ -1176,11 +1151,8 @@ body {
 .modal-panel { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:96%; max-width:680px; padding:1.2rem; background: rgba(11,14,22,0.95); border-radius:12px; border:1px solid rgba(250,204,21,0.08); box-shadow:0 30px 80px rgba(0,0,0,0.75); }
 .modal-close { position:absolute; right:12px; top:10px; background:transparent; border:none; color:#ddd; font-size:1.05rem; cursor:pointer; }
 
-.site-footer {
-  background: #070f1f;
-  padding: 60px 0 30px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
+
+
 
 
 
