@@ -1151,6 +1151,62 @@ body {
 .modal-panel { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:96%; max-width:680px; padding:1.2rem; background: rgba(11,14,22,0.95); border-radius:12px; border:1px solid rgba(250,204,21,0.08); box-shadow:0 30px 80px rgba(0,0,0,0.75); }
 .modal-close { position:absolute; right:12px; top:10px; background:transparent; border:none; color:#ddd; font-size:1.05rem; cursor:pointer; }
 
+/* ==============================
+   DEALER / OEM HIGHLIGHT SECTION
+============================== */
+
+.dealer-highlight {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(250,204,21,0.12), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(250,204,21,0.08), transparent 60%),
+    rgba(15,23,42,0.9);
+  border-top: 1px solid rgba(250,204,21,0.12);
+  border-bottom: 1px solid rgba(250,204,21,0.12);
+}
+
+/* Soft animated glow */
+.dealer-highlight::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle, rgba(250,204,21,0.18), transparent 60%);
+  animation: dealerGlow 10s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes dealerGlow {
+  0% { transform: translate(-20%, -20%); }
+  50% { transform: translate(20%, 20%); }
+  100% { transform: translate(-20%, -20%); }
+}
+
+/* Content stays above glow */
+.dealer-highlight .container {
+  position: relative;
+  z-index: 1;
+}
+/* Dealer badge entrance animation */
+.badge {
+  opacity: 0;
+  transform: translateY(22px);
+  animation: badgeIn 0.8s ease forwards;
+}
+
+.badge:nth-child(1) { animation-delay: 0.1s; }
+.badge:nth-child(2) { animation-delay: 0.25s; }
+.badge:nth-child(3) { animation-delay: 0.4s; }
+.badge:nth-child(4) { animation-delay: 0.55s; }
+
+@keyframes badgeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 
 
 
