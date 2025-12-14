@@ -1206,6 +1206,47 @@ body {
   }
 }
 
+/* ==============================
+   PREMIUM STATS SECTION
+============================== */
+
+.stats-section {
+  background: radial-gradient(circle at top, rgba(250,204,21,0.08), transparent 60%);
+  padding: 3.2rem 0;
+  border-bottom: 1px solid rgba(250,204,21,0.08);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.6rem;
+  text-align: center;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.04);
+  border-radius: 18px;
+  padding: 1.8rem 1rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+  backdrop-filter: blur(10px);
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #FACC15;
+  letter-spacing: 0.02em;
+}
+
+.stat-label {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+}
+
 
 
 
