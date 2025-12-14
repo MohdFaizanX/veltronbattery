@@ -153,11 +153,13 @@
         <li>Technical guidance and product training.</li>
         <li>Support for branding and marketing material.</li>
       </ul>
-      <div class="center-cta">
-        <a href="https://wa.me/919755587568" target="_blank" rel="noopener" class="btn btn-primary">
-          Apply as Dealer on WhatsApp
-        </a>
-      </div>
+     <div class="center-cta">
+  <a href="#"
+     class="btn btn-primary"
+     onclick="openWhatsApp(`Hello ${SITE.brand} Team, I want to apply as a Dealer from ${SITE.city}. Please guide me.`)">
+    Apply as Dealer on WhatsApp
+  </a>
+</div>
     </div>
   </section>
 
@@ -471,6 +473,13 @@ counters.forEach(counter => {
   updateCount();
 });
 
+// ===== WHATSAPP AUTO MESSAGE =====
+function openWhatsApp(message) {
+  const text = encodeURIComponent(message);
+  const url = `https://wa.me/${SITE.whatsapp}?text=${text}`;
+  window.open(url, "_blank");
+}
+
 </script>
 
   <script src="config.js"></script>
@@ -478,6 +487,7 @@ counters.forEach(counter => {
  
 </body>
 </html>
+
 
 
 
