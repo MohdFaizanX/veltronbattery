@@ -3,22 +3,26 @@
 
   <url>
     <loc>https://mohdfaizanx.github.io/veltronbattery/</loc>
+    <lastmod>2025-01-15</lastmod>
     <priority>1.00</priority>
   </url>
 
   <url>
-    <loc>https://mohdfaizanx.github.io/veltronbattery/about.html</loc>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
     <loc>https://mohdfaizanx.github.io/veltronbattery/products.html</loc>
+    <lastmod>2025-01-15</lastmod>
     <priority>0.90</priority>
   </url>
 
   <url>
+    <loc>https://mohdfaizanx.github.io/veltronbattery/about.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
     <loc>https://mohdfaizanx.github.io/veltronbattery/contact.html</loc>
-    <priority>0.70</priority>
+    <lastmod>2025-01-15</lastmod>
+    <priority>0.80</priority>
   </url>
 
 </urlset>
