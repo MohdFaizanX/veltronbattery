@@ -407,10 +407,13 @@ body {
 }
 
 /* Center CTA */
-.center-cta {
-  margin-top: 1.7rem;
-  text-align: center;
+.center-cta{
+  margin-top:30px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
 }
+
 
 /* Founders */
 .founder-card {
@@ -1334,6 +1337,7 @@ body {
   text-decoration:underline;
   font-weight:500;
 }
+
 
 
 
