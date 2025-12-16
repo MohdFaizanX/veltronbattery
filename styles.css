@@ -1325,6 +1325,16 @@ body {
   color: #020617;
 }
 
+.product-link-note{
+  margin-top:12px;
+  font-size:0.95rem;
+  opacity:0.85;
+}
+.product-link-note a{
+  text-decoration:underline;
+  font-weight:500;
+}
+
 
 
 
